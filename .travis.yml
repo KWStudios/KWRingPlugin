@@ -1,0 +1,38 @@
+sudo: required
+language: java
+jdk:
+- oraclejdk8
+script: mvn clean package
+install: true
+notifications:
+  email:
+    recipients:
+    - ybrin.development@gmail.com
+    - simon.artner@gmail.com
+    on_success: change
+    on_failure: always
+  webhooks: https://api.kwstudios.org/travis/webhooks/versions
+before_install:
+- ./run_buildtools.sh
+# Cache maven directory for faster builds
+cache:
+  directories:
+  - $HOME/.m2
+before_deploy:
+- ls
+- cd target/
+- ls
+- cd ..
+deploy:
+  provider: gcs
+  access_key_id: GOOGOORZ55TL3TFGHJHZ
+  secret_access_key:
+    secure: EMxBsINThBLTRK7oswbEEtGCEW6jhk3kw/lq8YopVapjI58OP3GQNRrx3PoPE0PiNdmOYhf27daXlbMzPC5QE5qDyV01jxXgoKxG/B9TvT2+bKkgbapqL9BuHKeIgFBf4pv510tsYlPYn4EGislvABFP6A75JnShWpSDmIGfEnCtKqIrgFrS0eier6b2hqwlCi1VlAWm3xTw6ceaKwFEUgHG+vAydJC/NEhrpKhlMB1FeShqUm4gc3arl72zlyd02OFu3cevNCZmY4JT6Yiw47J6MQAo5ykEB85EUlCIv8oXPkgLoSja2rOBaYFUDaU0p+8ptUFGXSWbSxcJhHoF8pJK5VKOhqcbf7hC+ZDanE55FRTdwaP1P5clsDXJb/h0yFLhQgQiKuxrptfJ9TLTZl9YMHGVq7zscrmWsD6hTJO4oY53Fo5Yi+ko993BXT3C4n0VOogUngl5PdxPJdXzOLG42eUmu6WNsAaSylSxszfc+nxXjdV6Ofh/dBxm9ImVlI3hh/XSoNfmopvCxJ9QY57WmCKWTGvKKiNRePS9bG90+udtQrA8qX/PNfi+rjVmKJEmyKmmqBSHt7XJwUJZzcyVn5G8XmSGlGa4thED9ka6IUdjeAWUBGZBGQq12UdoLo9RB2ncwaM7sQ9mOkl4Bb0cfeqy9avgNIudYsFRuXc=
+  file_glob: true
+  bucket: kwstudios-main-bucket
+  local-dir: ${HOME}/build/${TRAVIS_REPO_SLUG}/target
+  upload-dir: travis/kwringplugin/${TRAVIS_BUILD_NUMBER}
+  skip_cleanup: true
+  acl: public-read
+  on:
+    repo: KWStudios/KWRingPlugin

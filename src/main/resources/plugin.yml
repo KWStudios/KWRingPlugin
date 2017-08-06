@@ -1,0 +1,9 @@
+name: KWRingPlugin
+main: org.kwstudios.play.kwringplugin.loader.PluginLoader
+version: 1.0.1
+
+commands:
+  ring:
+    description: Plays a sound for the given user.
+    permission: kwringplugin.ring
+    permission-message: You may not ring!
