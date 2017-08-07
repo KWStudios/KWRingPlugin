@@ -13,11 +13,10 @@ notifications:
     on_failure: always
   webhooks: https://api.kwstudios.org/travis/webhooks/versions
 before_install:
-- ./run_buildtools.sh
-# Cache maven directory for faster builds
+- "./run_buildtools.sh"
 cache:
   directories:
-  - $HOME/.m2
+  - "$HOME/.m2"
 before_deploy:
 - ls
 - cd target/
@@ -27,7 +26,7 @@ deploy:
   provider: gcs
   access_key_id: GOOGOORZ55TL3TFGHJHZ
   secret_access_key:
-    secure: EMxBsINThBLTRK7oswbEEtGCEW6jhk3kw/lq8YopVapjI58OP3GQNRrx3PoPE0PiNdmOYhf27daXlbMzPC5QE5qDyV01jxXgoKxG/B9TvT2+bKkgbapqL9BuHKeIgFBf4pv510tsYlPYn4EGislvABFP6A75JnShWpSDmIGfEnCtKqIrgFrS0eier6b2hqwlCi1VlAWm3xTw6ceaKwFEUgHG+vAydJC/NEhrpKhlMB1FeShqUm4gc3arl72zlyd02OFu3cevNCZmY4JT6Yiw47J6MQAo5ykEB85EUlCIv8oXPkgLoSja2rOBaYFUDaU0p+8ptUFGXSWbSxcJhHoF8pJK5VKOhqcbf7hC+ZDanE55FRTdwaP1P5clsDXJb/h0yFLhQgQiKuxrptfJ9TLTZl9YMHGVq7zscrmWsD6hTJO4oY53Fo5Yi+ko993BXT3C4n0VOogUngl5PdxPJdXzOLG42eUmu6WNsAaSylSxszfc+nxXjdV6Ofh/dBxm9ImVlI3hh/XSoNfmopvCxJ9QY57WmCKWTGvKKiNRePS9bG90+udtQrA8qX/PNfi+rjVmKJEmyKmmqBSHt7XJwUJZzcyVn5G8XmSGlGa4thED9ka6IUdjeAWUBGZBGQq12UdoLo9RB2ncwaM7sQ9mOkl4Bb0cfeqy9avgNIudYsFRuXc=
+    secure: oOflhxSRCYyBVUSrD+icbkysWo22PskjUWzMwCLoUx6E3lKoDW+T/7Dbgx+AOQQLUz96o/C6L4mGTUQ+I4rSPMgo/iFbv3SQy6A+bC5SRS2/36b0Zrfq4TbWnGG9aH8lzXHm/4kNw9lL0nNYpdXV4f1tLgYAogS05H2SbbIlZGOxDQRWyHfEx4e5hi8gEch9lQNc/aAyC74TSCAY38+dlL8udGZWlRAvNVlEDTgqt6fqzCM8klIYNpVnm7ruKarGubLceAzRdhC6dC2qpIj0yI68MqZSTqgGl6tM3micY13qPQXG2SxnCwnNWZdwhbzJMk1czrLSzOM2pwkPjVA8scD26jBe9c9LEhkDpquDuWno2APsLeKtWIdfSe0Pdc4A7M6T+uUv0iDB2prITP7u0OBvmQz8fI28Du4gRfK2+v2ZvwxtrGyywUs6GC2N1Oq9Z45ZsiPuAD3O3iMtayRVbb8tSJhDpSlgS5p301FtusWVZn+ULnBBAi65jnmsFn6ljMIERw55wI20/gNfqRxs8dEh1XZFUBnPV08yz7Jq9zntUX80WbjxXjtQOe447WkIaVFBP0YleFVk2ghusSGn1Rvs4KruO42pygpzlI6t9/DttxW6rLxKtISi24r3PTZTXDu/TCCOHmaN/eyEBsv+ZHpAI25izWkXwdR8xbBOnxU=
   file_glob: true
   bucket: kwstudios-main-bucket
   local-dir: ${HOME}/build/${TRAVIS_REPO_SLUG}/target
